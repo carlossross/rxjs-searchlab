@@ -10,6 +10,29 @@
     />
   </div>
 
+  <!-- 🔵 Filtros -->
+  <div class="filters">
+    <button type="button" (click)="onFilterChange('all')" [class.active]="store.filter() === 'all'">
+      Todos
+    </button>
+
+    <button
+      type="button"
+      (click)="onFilterChange('title')"
+      [class.active]="store.filter() === 'title'"
+    >
+      Solo título (Angular/RxJS)
+    </button>
+
+    <button
+      type="button"
+      (click)="onFilterChange('description')"
+      [class.active]="store.filter() === 'description'"
+    >
+      Solo descripción (Angular/RxJS)
+    </button>
+  </div>
+
   <div class="status">
     @if (store.loading()) {
     <span>Buscando...</span>
@@ -29,4 +52,16 @@
     <li><em>Sin resultados.</em></li>
     }
   </ul>
+
+  @if(store.total()>0){
+  <div class="pagination">
+    <button type="button" (click)="onPrevPage()" [disabled]="!store.hasPrev()">Anterior</button>
+
+    <span>
+      Página {{ store.page() }} de {{ store.totalPages() }} ({{ store.total() }} resultados)
+    </span>
+
+    <button type="button" (click)="onNextPage()" [disabled]="!store.hasNext()">Siguiente</button>
+  </div>
+  }
 </section>

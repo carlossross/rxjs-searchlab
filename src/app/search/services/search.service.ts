@@ -29,6 +29,11 @@ const MOCK_ITEMS: SearchItem[] = [
   },
 ];
 
+export interface PagedResult<T> {
+  items: T[];
+  total: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -52,6 +57,36 @@ export class SearchService {
             item.description.toLowerCase().includes(normalized)
         )
       )
+    );
+  }
+
+  // 🔵 Nuevo: búsqueda paginada
+  searchPaged(term: string, page: number, pageSize: number): Observable<PagedResult<SearchItem>> {
+    const normalized = term.toLowerCase();
+
+    return of(MOCK_ITEMS).pipe(
+      delay(Math.random() * 1500 + 200),
+      mergeMap((items) => {
+        const shouldFail = Math.random() < 0.3;
+        if (shouldFail) {
+          return throwError(() => new Error('Network error simulated'));
+        }
+        return of(items);
+      }),
+      map((items) =>
+        items.filter(
+          (item) =>
+            item.title.toLowerCase().includes(normalized) ||
+            item.description.toLowerCase().includes(normalized)
+        )
+      ),
+      map((filtered) => {
+        const total = filtered.length;
+        const start = (page - 1) * pageSize;
+        const end = start + pageSize;
+        const items = filtered.slice(start, end);
+        return { items, total };
+      })
     );
   }
 }

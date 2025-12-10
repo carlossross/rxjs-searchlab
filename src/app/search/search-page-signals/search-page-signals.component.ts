@@ -13,4 +13,16 @@ export class SearchPageSignalsComponent {
   onSearchChange(term: string) {
     this.store.setQuery(term);
   }
+
+  onNextPage() {
+    this.store.nextPage();
+  }
+
+  onPrevPage() {
+    this.store.prevPage();
+  }
+
+  onFilterChange(filter: 'all' | 'title' | 'description') {
+    this.store.setFilter(filter);
+  }
 }

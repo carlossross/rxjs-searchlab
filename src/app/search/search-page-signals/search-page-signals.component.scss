@@ -28,3 +28,69 @@ input[type='text']:focus {
   color: #9ca3af;
   margin-top: 1rem;
 }
+
+.filters {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1rem 0 1.5rem;
+  padding: 0.25rem;
+  background: #f5f5f7; // gris suave estilo Apple
+  border-radius: 0.75rem;
+  align-items: center;
+
+  // Para que no se vea tan apretado en móvil
+  flex-wrap: wrap;
+
+  button {
+    padding: 0.45rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    background: #ffffff;
+    color: #333;
+    transition: all 0.15s ease-in-out;
+
+    // Sombra ligera estilo "card minimalista"
+    box-shadow: 0 0 0 1px #e1e1e6 inset;
+
+    &:hover {
+      background: #fafafa;
+      box-shadow: 0 0 0 1px #d4d4d8 inset;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      background: #f0f0f0;
+    }
+
+    // Para modo dark (si lo usas después)
+    @media (prefers-color-scheme: dark) {
+      background: #1e1e1f;
+      color: #f4f4f5;
+      box-shadow: 0 0 0 1px #2e2e2f inset;
+
+      &:hover {
+        background: #262626;
+        box-shadow: 0 0 0 1px #3a3a3c inset;
+      }
+    }
+
+    &.active {
+      background: #3b82f6; // azul bonito estilo Tailwind
+      color: #fff;
+      box-shadow: none;
+      transform: translateY(-1px);
+
+      &:hover {
+        background: #357ae8;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        background: #2563eb;
+      }
+    }
+  }
+}
