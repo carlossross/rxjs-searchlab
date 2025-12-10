@@ -1,0 +1,30 @@
+.page {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: #020617;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.search-bar {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+input[type='text'] {
+  width: 100%;
+  max-width: -webkit-fill-available;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #4b5563;
+  background: #020617;
+  color: inherit;
+  outline: none;
+}
+input[type='text']:focus {
+  border-color: #38bdf8;
+}
+.debug {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 1rem;
+}
