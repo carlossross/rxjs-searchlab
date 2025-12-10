@@ -1,0 +1,32 @@
+<section class="page">
+  <h1>SearchLab · RxJS + Signals + Store</h1>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [value]="store.searchQuery()"
+      (input)="onSearchChange($event.target.value)"
+      placeholder="Escribe para buscar (mín. 2 letras)..."
+    />
+  </div>
+
+  <div class="status">
+    @if (store.loading()) {
+    <span>Buscando...</span>
+    } @else if (store.error()) {
+    <span>{{ store.error() }}</span>
+    }
+  </div>
+
+  <ul class="results">
+    @for (item of store.results(); track item.id) {
+    <li>
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.description }}</p>
+    </li>
+    } @if ( !store.loading() && !store.error() && store.results().length === 0 &&
+    store.searchQuery().trim().length >= 2 ) {
+    <li><em>Sin resultados.</em></li>
+    }
+  </ul>
+</section>

@@ -4,7 +4,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   catchError,
   concatMap,
+  count,
   debounceTime,
+  delay,
   distinctUntilChanged,
   exhaustMap,
   filter,
@@ -12,6 +14,7 @@ import {
   map,
   mergeMap,
   of,
+  retry,
   switchMap,
   tap,
 } from 'rxjs';
@@ -71,6 +74,10 @@ export class SearchPageComponent {
           this.loading.set(true);
           this.error.set(null);
           return this.searchService.search(term).pipe(
+            retry({
+              count: 2,
+              delay: 500,
+            }),
             catchError((err) => {
               console.log('search error', err);
               this.error.set('Ocurrió un error buscando. Intenta de nuevo.');

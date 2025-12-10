@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { delay, map, Observable, of } from 'rxjs';
+import { delay, map, mergeMap, Observable, of, throwError } from 'rxjs';
 
 export interface SearchItem {
   id: number;
@@ -38,6 +38,13 @@ export class SearchService {
 
     return of(MOCK_ITEMS).pipe(
       delay(Math.random() * 1500 + 200),
+      mergeMap((items) => {
+        const shouldFail = Math.random() < 0.3;
+        if (shouldFail) {
+          return throwError(() => new Error('Network error simulated'));
+        }
+        return of(items);
+      }),
       map((items) =>
         items.filter(
           (item) =>
