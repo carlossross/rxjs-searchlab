@@ -37,7 +37,7 @@ export class SearchService {
     const normalized = term.toLowerCase();
 
     return of(MOCK_ITEMS).pipe(
-      delay(600),
+      delay(Math.random() * 1500 + 200),
       map((items) =>
         items.filter(
           (item) =>
