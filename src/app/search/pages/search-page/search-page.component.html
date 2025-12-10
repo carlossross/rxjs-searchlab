@@ -1,0 +1,33 @@
+<section class="page">
+  <h1>SearchLab · RxJS + Signals</h1>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [formControl]="searchControl"
+      placeholder="Escribe para buscar (mín. 2 letras)..."
+    />
+  </div>
+
+  <div class="status">
+    @if (loading()) {
+    <span>Buscando...</span>
+    } @if (error()) {
+    <span>{{ error() }}</span>
+    }
+  </div>
+
+  <ul class="results">
+    @for (item of results(); track item.id) {
+    <li>
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.description }}</p>
+    </li>
+    } @if (!loading() && !error() && results().length === 0 && searchControl.value.trim().length >=
+    2) {
+    <li>
+      <em>Sin resultados.</em>
+    </li>
+    }
+  </ul>
+</section>
