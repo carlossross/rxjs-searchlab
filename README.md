@@ -1,59 +1,43 @@
-# RxjsSearchlab
+# RxJS SearchLab
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+A focused lab to practice **real-world RxJS patterns** using a search/autocomplete use case.
 
-## Development server
+## 🎯 Purpose
 
-To start a local development server, run:
+Search is a great problem to model with streams because it requires:
+- Debouncing user input
+- Cancelling in-flight requests
+- Managing loading/error/empty states
+- Preventing race conditions (stale responses)
+- Composing async flows predictably
 
-```bash
-ng serve
-```
+This project is intentionally UI-light and pattern-heavy.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🧠 RxJS Concepts Demonstrated
 
-## Code scaffolding
+- `debounceTime` + `distinctUntilChanged`
+- Cancellation with `switchMap`
+- Error handling with `catchError`
+- Loading state with `startWith` / `tap`
+- Response shaping with `map`
+- Side effects boundaries with `tap`
+- Stream sharing when needed (`shareReplay`) *(only when justified)*
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🛠 Tech Stack
 
-```bash
-ng generate component component-name
-```
+- TypeScript
+- RxJS
+- (Angular if applicable)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## ✅ What to look for
 
-```bash
-ng generate --help
-```
+- Clear stream ownership (input → query → request → state)
+- No nested subscriptions
+- Predictable state transitions (loading/success/error/empty)
+- Avoiding stale responses and race conditions
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## ▶️ Run
 
 ```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+npm install
+npm start
